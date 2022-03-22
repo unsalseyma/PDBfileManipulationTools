@@ -12,13 +12,15 @@ import sys
 
 f = sys.argv[1]
 try:
-    changeRes=sys.argv[2]  # should be restart or False
-    # if residue numbers will be updated, It should be True. Otherwise, False.
-except:
+    changeRes=sys.argv[2]  # should be restart or None
+    # if residue numbers will be updated, It should be 'restart'. Otherwise, None.
+    assert changeRes == 'restart'
+except IndexError:
     changeRes=False
-    # sys.exit("\n**** WARNING****\nYou should enter second input which is either 'True' or 'False'.\n"
-    #          "True:\tIf you want to restart residue number for each chain.\n"
-    #          "False:\tIf you don't want to change residue number.\n")
+except:
+    sys.exit("\n**** WARNING****\nYou should enter second input as 'restart' if you want to update residue numbers for each chain.\n"
+              "Otherwise, no second input is necessary.\n")
+
 fout = sys.stdout
 
 flines = []
